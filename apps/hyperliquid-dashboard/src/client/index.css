@@ -1,0 +1,253 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #0d1117;
+  --surface: #161b22;
+  --border: #30363d;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --strong-bull: #3fb950;
+  --bull: #56d364;
+  --neutral: #8b949e;
+  --bear: #f85149;
+  --strong-bear: #da3633;
+  --accent: #388bfd;
+  --font: 'SF Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.app {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.header-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.header-meta .dot { color: var(--border); }
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 12px;
+  padding: 6px 10px;
+  width: 180px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.search:focus { border-color: var(--accent); }
+.search::placeholder { color: var(--muted); }
+
+.filter-group { display: flex; gap: 4px; }
+
+.filter-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 11px;
+  padding: 5px 10px;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.filter-btn:hover { border-color: var(--muted); color: var(--text); }
+.filter-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.refresh-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 11px;
+  margin-left: auto;
+  padding: 5px 10px;
+  transition: all 0.15s;
+}
+.refresh-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Table */
+.table-wrap {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+thead {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 10px 12px;
+  text-align: right;
+  user-select: none;
+  white-space: nowrap;
+}
+th:first-child { text-align: left; }
+
+th.sortable { cursor: pointer; }
+th.sortable:hover { color: var(--text); }
+th.sort-asc::after { content: ' ↑'; }
+th.sort-desc::after { content: ' ↓'; }
+
+td {
+  border-bottom: 1px solid #21262d;
+  padding: 9px 12px;
+  text-align: right;
+  vertical-align: middle;
+}
+td:first-child { text-align: left; }
+
+tbody tr:last-child td { border-bottom: none; }
+
+tbody tr:hover { background: #1c2128; }
+
+/* Cells */
+.coin-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.coin-name {
+  color: var(--text);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.leverage-tag {
+  background: #21262d;
+  border-radius: 4px;
+  color: var(--muted);
+  font-size: 10px;
+  padding: 1px 5px;
+}
+
+.price { color: var(--text); }
+
+.change-pos { color: var(--strong-bull); }
+.change-neg { color: var(--bear); }
+.change-zero { color: var(--muted); }
+
+.funding-pos { color: var(--bear); }   /* positive funding = bearish signal */
+.funding-neg { color: var(--strong-bull); }
+.funding-zero { color: var(--muted); }
+
+.num { color: var(--muted); }
+
+/* Signal badge */
+.badge {
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 3px 8px;
+  text-align: center;
+  white-space: nowrap;
+}
+.badge-strong_bullish { background: #0d4429; color: var(--strong-bull); }
+.badge-bullish        { background: #0d3321; color: var(--bull); }
+.badge-neutral        { background: #21262d; color: var(--muted); }
+.badge-bearish        { background: #3d1a1a; color: var(--bear); }
+.badge-strong_bearish { background: #3d1212; color: var(--strong-bear); }
+
+/* Score bar */
+.score-cell {
+  align-items: center;
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+.score-bar-wrap {
+  background: #21262d;
+  border-radius: 2px;
+  height: 6px;
+  position: relative;
+  width: 60px;
+}
+.score-bar {
+  border-radius: 2px;
+  height: 6px;
+  position: absolute;
+  top: 0;
+  transition: width 0.3s;
+}
+.score-num {
+  font-size: 11px;
+  min-width: 28px;
+  text-align: right;
+}
+
+/* Loading / error */
+.state-row td {
+  color: var(--muted);
+  padding: 40px;
+  text-align: center;
+}
+.error-text { color: var(--bear); }
+
+/* Status dot */
+.status-dot {
+  border-radius: 50%;
+  display: inline-block;
+  height: 7px;
+  width: 7px;
+}
+.status-dot.ok { background: var(--strong-bull); }
+.status-dot.loading { background: #e3b341; }
+.status-dot.error { background: var(--bear); }

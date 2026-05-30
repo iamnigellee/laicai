@@ -1,0 +1,12 @@
+{
+  "name": "laicai",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter hyperliquid-dashboard dev",
+    "build": "pnpm --filter hyperliquid-dashboard build"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "pnpm": {
+    "onlyBuiltDependencies": ["esbuild"]
+  }
+}
